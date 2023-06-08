@@ -8,13 +8,46 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html,
+      body,
+      .container-fluid,
+      .row {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sidebar {
+        background-color: #343a40;
+        color: #fff;
+        height: 100%;
+      }
+
+      .custom-gutter .col {
+        padding: 0.5rem;
+      }
+
+      /* Custom CSS for uniform gutters */
+      .custom-gutter > [class^="col-"],
+      .custom-gutter > [class*=" col-"] {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 1rem;
+      }
+    </style>
   </head>
 
   <body>
     <div class="container-fluid">
-      <div class="row">
+      <div class="row custom-gutter">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-dark text-white">
+        <div class="col-md-3 sidebar position-fixed">
           <div class="py-4 px-3">
             <h1 class="h3">Admin Dashboard</h1>
           </div>
@@ -37,6 +70,9 @@
           </ul>
         </div>
 
+        <!-- Keeps things aligned when the sidebar is fixed position -->
+        <div class="col-md-3"></div>
+
         <!-- Main Content -->
         <div class="col-md-9">
           <div class="py-4 px-3">
@@ -44,7 +80,7 @@
           </div>
           <div class="container">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-4">
                 <div class="card mb-3">
                   <div class="card-body">
                     <h5 class="card-title">Total Users</h5>
@@ -52,7 +88,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-4">
                 <div class="card mb-3">
                   <div class="card-body">
                     <h5 class="card-title">Total Products</h5>
@@ -60,11 +96,87 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-4">
                 <div class="card mb-3">
                   <div class="card-body">
                     <h5 class="card-title">Total Orders</h5>
                     <p class="card-text">200</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <canvas id="lineChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <canvas id="barChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Datasets</h5>
+                    <ul>
+                      <li>Dataset 1</li>
+                      <hr />
+                      <li>Dataset 2</li>
+                      <hr />
+                      <li>Dataset 3</li>
+                      <hr />
+                      <li>Dataset 4</li>
+                      <hr />
+                      <li>Dataset 5</li>
+                      <hr />
+                      <li>Dataset 6</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Datasets</h5>
+                    <ul>
+                      <li>Dataset 1</li>
+                      <hr />
+                      <li>Dataset 2</li>
+                      <hr />
+                      <li>Dataset 3</li>
+                      <hr />
+                      <li>Dataset 4</li>
+                      <hr />
+                      <li>Dataset 5</li>
+                      <hr />
+                      <li>Dataset 6</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Datasets</h5>
+                    <ul>
+                      <li>Dataset 1</li>
+                      <hr />
+                      <li>Dataset 2</li>
+                      <hr />
+                      <li>Dataset 3</li>
+                      <hr />
+                      <li>Dataset 4</li>
+                      <hr />
+                      <li>Dataset 5</li>
+                      <hr />
+                      <li>Dataset 6</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -75,5 +187,41 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the canvas element
+        var ctx = document.getElementById("lineChart").getContext("2d");
+
+        // Prepare the data for the line chart
+        var chartData = {
+          labels: ["January", "February", "March", "April", "May", "June"],
+          datasets: [
+            {
+              label: "Sales",
+              data: [150, 200, 300, 250, 400, 350],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              tension: 0.4,
+            },
+          ],
+        };
+
+        // Configure the chart options
+        var chartOptions = {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        };
+
+        // Create and render the line chart
+        var lineChart = new Chart(ctx, {
+          type: "line",
+          data: chartData,
+          options: chartOptions,
+        });
+      });
+    </script>
   </body>
 </html>
